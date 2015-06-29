@@ -3,20 +3,24 @@
 //--------------------------------------------------------------
 void auroraShapes1::setup(){
 
-    color1 = ofColor(0, 0, ofRandom( 128, 255 ) );
-    color2 = ofColor(ofRandom( 128, 255 ), 0, 0 );
-    color3 = ofColor(0, ofRandom( 128, 255 ), ofRandom( 128, 255 ) );
-    color4 = ofColor(0, 0, ofRandom( 128, 255 ) );
-    
-    color1.setBrightness(255);
-    color2.setBrightness(255);
-    color3.setBrightness(255);
-    color4.setBrightness(255);
-    color1.setSaturation(255);
+    color1 = ofColor(64, 64, ofRandom( 128, 255 ) );
+    color2 = ofColor(ofRandom( 128, 255 ), 64, 64 );
+    color3 = ofColor(64, ofRandom( 128, 255 ), ofRandom( 128, 255 ) );
+    color4 = ofColor(64, 64, ofRandom( 128, 255 ) );
 }
 
-//--------------------------------------------------------------
 void auroraShapes1::update(){
+    //beat();
+
+    for (int i=0; i < sizeof(sceneTimes)/sizeof(sceneTimes[0]); i++)
+    {
+        if (ofGetElapsedTimeMillis() >= sceneTimes[i])
+            currentScene = i;
+    }
+}
+
+//simulate heartbeat
+void auroraShapes1::beat(){
     if (ofGetFrameNum() % 45 < 5)
         scale = 0.8;
     else
@@ -38,23 +42,83 @@ void auroraShapes1::drawRandomCircle(float r0, float r1) {
     line.draw();
 }
 
-//--------------------------------------------------------------
+//start, end: 0-11 (end > start)
+void auroraShapes1::drawArc12(int radius, int start, int end) {
+    ofPolyline line;
+    
+    float rscale = 1/15.0;
+    
+    float angleBegin = 0, angleEnd = 0;
+    if (start != 12) angleBegin = (start * 360/12) % 360;
+    if (end   != 12) angleEnd   = (end   * 360/12) % 360;
+
+    line.arc(0, 0, radius * rscale, radius * rscale, angleBegin, angleEnd, 100);
+    line.draw();
+}
+
+void auroraShapes1::drawCircles(){
+    ofSetColor(color1);
+    drawRandomCircle(0.85, 0.85);
+    
+    ofSetColor(color2);
+    drawRandomCircle(0.85, 1.0);
+    
+    ofSetColor(color3);
+    drawRandomCircle(1.0, 1.25);
+    
+    ofSetColor(color4);
+    drawRandomCircle(1.25, 1.25);
+}
+
+void auroraShapes1::drawPattern(){
+    int last = 0;
+    int digits[] = {3, 1, 4, 1, 5, 9};
+    for (int i=0; i < 7; i++)
+    {
+        int start = last;
+        int end = (last+digits[i]); // % 12;
+        last = end;
+        
+        drawArc12(i+1, start, end);
+    }
+}
+
 void auroraShapes1::draw(){
     ofBackground(0);
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofScale(200*scale, 200*scale);
 
+    switch (currentScene) {
+        case 1:
+            drawScene1();
+            break;
+            
+        case 2:
+            drawScene2();
+            break;
+            
+        case 3:
+            drawScene3();
+            break;
+
+        default:
+            ofBackground(0);
+            break;
+    }
+}
+
+void auroraShapes1::drawScene1(){
     ofSetColor(color1);
-    drawRandomCircle(0.85, 0.85);
+    drawPattern();
+}
 
-    ofSetColor(color2);
-    drawRandomCircle(0.85, 1.0);
+void auroraShapes1::drawScene2(){
+    ofBackground(color2);
+    drawCircles();
+}
 
-    ofSetColor(color3);
-    drawRandomCircle(1.0, 1.25);
-
-    ofSetColor(color4);
-    drawRandomCircle(1.25, 1.25);
+void auroraShapes1::drawScene3(){
+    ofBackground(color3);
 }
 
 //--------------------------------------------------------------
