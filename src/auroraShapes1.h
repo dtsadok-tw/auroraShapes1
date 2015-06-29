@@ -27,6 +27,9 @@ class auroraShapes1 : public ofBaseApp{
     ofSoundPlayer sofyPlayer;
     ofSoundPlayer danPlayer;
     ofSoundPlayer normPlayer;
+    
+    void setupAudio();
+    void triggerAudio(int sceneNum);
 
     void beat();
     void drawCircles();

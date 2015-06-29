@@ -40,6 +40,7 @@ void auroraShapes1::update(){
     {
         //triggerAudioFor(newScene);
         currentScene = newScene;
+        triggerAudio(newScene);
     }
 }
 
@@ -185,6 +186,25 @@ void auroraShapes1::drawPattern(){
         last = end;
         
         drawArc12(i+1, start, end);
+    }
+}
+
+void auroraShapes1::triggerAudio(int sceneNum){
+    switch (sceneNum) {
+        case 1:
+            sofyPlayer.play();
+            break;
+        case 2:
+            danPlayer.play();
+            break;
+        case 3:
+            aviPlayer.play();
+            break;
+        case 4:
+            normPlayer.play();
+            break;
+        default:
+            break;
     }
 }
 
