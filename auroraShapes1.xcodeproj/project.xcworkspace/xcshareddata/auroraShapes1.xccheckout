@@ -10,29 +10,29 @@
 	<string>auroraShapes1</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B2FB3050-F5D3-468C-93D8-4BA981E6E20D</key>
-		<string>ssh://github.com/dtsadok-tw/auroraShapes1.git</string>
+		<key>6D468F4119F9A46B6C58B62CAA20E991DF79ED94</key>
+		<string>https://github.com/dtsadok-tw/auroraShapes1.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>auroraShapes1.xcodeproj/project.xcworkspace</string>
+	<string>auroraShapes1.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B2FB3050-F5D3-468C-93D8-4BA981E6E20D</key>
+		<key>6D468F4119F9A46B6C58B62CAA20E991DF79ED94</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/dtsadok-tw/auroraShapes1.git</string>
+	<string>https://github.com/dtsadok-tw/auroraShapes1.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B2FB3050-F5D3-468C-93D8-4BA981E6E20D</string>
+	<string>6D468F4119F9A46B6C58B62CAA20E991DF79ED94</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B2FB3050-F5D3-468C-93D8-4BA981E6E20D</string>
+			<string>6D468F4119F9A46B6C58B62CAA20E991DF79ED94</string>
 			<key>IDESourceControlWCCName</key>
 			<string>auroraShapes1</string>
 		</dict>

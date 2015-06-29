@@ -7,6 +7,28 @@ void auroraShapes1::setup(){
     color2 = ofColor(ofRandom( 128, 255 ), 64, 64 );
     color3 = ofColor(64, ofRandom( 128, 255 ), ofRandom( 128, 255 ) );
     color4 = ofColor(64, 64, ofRandom( 128, 255 ) );
+    setupAudio();
+}
+
+void auroraShapes1::setupAudio(){
+    aviPlayer.loadSound("sounds/Avi Heart#03.aif");
+    aviPlayer.setVolume(1.0f);
+    aviPlayer.setMultiPlay(false);
+//    aviPlayer.setPosition(0.1);
+    
+    sofyPlayer.loadSound("sounds/Sofy Heart#01.aif");
+    sofyPlayer.setVolume(1.0f);
+    sofyPlayer.setMultiPlay(false);
+//    sofyPlayer.setPosition(0.5);
+    
+    danPlayer.loadSound("sounds/Pedro Heart#05.aif");
+    danPlayer.setVolume(1.0f);
+    danPlayer.setMultiPlay(false);
+    
+    normPlayer.loadSound("sounds/Norm#02.aif");
+    normPlayer.setVolume(1.0f);
+    normPlayer.setMultiPlay(false);
+
 }
 
 void auroraShapes1::update(){
@@ -18,6 +40,7 @@ void auroraShapes1::update(){
     {
         //triggerAudioFor(newScene);
         currentScene = newScene;
+        triggerAudio(newScene);
     }
 }
 
@@ -163,6 +186,25 @@ void auroraShapes1::drawPattern(){
         last = end;
         
         drawArc12(i+1, start, end);
+    }
+}
+
+void auroraShapes1::triggerAudio(int sceneNum){
+    switch (sceneNum) {
+        case 1:
+            sofyPlayer.play();
+            break;
+        case 2:
+            danPlayer.play();
+            break;
+        case 3:
+            aviPlayer.play();
+            break;
+        case 4:
+            normPlayer.play();
+            break;
+        default:
+            break;
     }
 }
 
