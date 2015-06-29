@@ -1,8 +1,8 @@
 #include "auroraShapes1.h"
 
-//--------------------------------------------------------------
 void auroraShapes1::setup(){
 
+    white = ofColor(255, 255, 255);
     color1 = ofColor(64, 64, ofRandom( 128, 255 ) );
     color2 = ofColor(ofRandom( 128, 255 ), 64, 64 );
     color3 = ofColor(64, ofRandom( 128, 255 ), ofRandom( 128, 255 ) );
@@ -10,21 +10,104 @@ void auroraShapes1::setup(){
 }
 
 void auroraShapes1::update(){
-    //beat();
+    beat();
 
-    for (int i=0; i < sizeof(sceneTimes)/sizeof(sceneTimes[0]); i++)
+    int newScene = getSceneNumber();
+
+    if (newScene != currentScene) //transition?
     {
-        if (ofGetElapsedTimeMillis() >= sceneTimes[i])
-            currentScene = i;
+        //triggerAudioFor(newScene);
+        currentScene = newScene;
+    }
+}
+
+void auroraShapes1::draw(){
+    ofBackground(0);
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+    //ofScale(50*scale, 50*scale);
+    //ofScale(50, 50);
+
+    switch (currentScene) {
+        case 1:
+            drawScene1();
+            break;
+
+        case 2:
+            drawScene2();
+            break;
+
+        case 3:
+            drawScene3();
+            break;
+
+        case 4:
+            drawScene4();
+            break;
+
+        default:
+            ofBackground(0);
+            break;
     }
 }
 
 //simulate heartbeat
 void auroraShapes1::beat(){
     if (ofGetFrameNum() % 45 < 5)
-        scale = 0.8;
+        scale = 0.95;
     else
-        scale = 1.0;
+        scale = 1.00;
+}
+
+int auroraShapes1::getSceneNumber(){
+    int sceneTimesLength = sizeof(sceneTimes)/sizeof(sceneTimes[0]);
+    for (int i=sceneTimesLength-1; i >= 0; i--)
+    {
+        if (ofGetElapsedTimeMillis() >= sceneTimes[i])
+            return i;
+    }
+}
+
+void auroraShapes1::drawScene1(){
+    ofBackground(0);
+    ofSetColor(white);
+
+    ofPolyline line;
+    int radius = 80*scale;
+    line.arc(0, 0, radius, radius, 0, 360, 100);
+    line.draw();
+}
+
+void auroraShapes1::drawScene2(){
+    ofBackground(color2);
+    ofSetColor(white);
+
+    int radius = 40*scale;
+    ofPolyline circle1, circle2;
+    circle1.arc(2*radius, 2*radius, radius, radius, 0, 360, 100);
+    circle1.draw();
+    circle2.arc(-2*radius, -2*radius, radius, radius, 0, 360, 100);
+    circle2.draw();
+}
+
+void auroraShapes1::drawScene3(){
+    ofBackground(color3);
+    ofSetColor(white);
+
+    int numCircles = 4;
+    int radius = 25*scale;
+    int centers[4][2] = {{-1, 1}, {1, 1}, {1, -1}, {-1, -1}};
+
+    for (int i=0; i< numCircles; i++)
+    {
+        ofPolyline circle;
+        circle.arc(centers[i][0]*4*radius, centers[i][1]*4*radius,
+                   radius, radius, 0, 360, 100);
+        circle.draw();
+    }
+}
+
+void auroraShapes1::drawScene4(){
+    ofSetColor(0);
 }
 
 void auroraShapes1::drawRandomCircle(float r0, float r1) {
@@ -83,85 +166,6 @@ void auroraShapes1::drawPattern(){
     }
 }
 
-void auroraShapes1::draw(){
-    ofBackground(0);
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofScale(200*scale, 200*scale);
-
-    switch (currentScene) {
-        case 1:
-            drawScene1();
-            break;
-            
-        case 2:
-            drawScene2();
-            break;
-            
-        case 3:
-            drawScene3();
-            break;
-
-        default:
-            ofBackground(0);
-            break;
-    }
-}
-
-void auroraShapes1::drawScene1(){
-    ofSetColor(color1);
-    drawPattern();
-}
-
-void auroraShapes1::drawScene2(){
-    ofBackground(color2);
-    drawCircles();
-}
-
-void auroraShapes1::drawScene3(){
-    ofBackground(color3);
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::keyPressed(int key){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
 void auroraShapes1::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void auroraShapes1::dragEvent(ofDragInfo dragInfo){ 
 
 }
