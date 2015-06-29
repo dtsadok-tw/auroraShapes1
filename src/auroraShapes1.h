@@ -21,6 +21,12 @@ class auroraShapes1 : public ofBaseApp{
     void drawScene2();
     void drawScene3();
     void drawScene4();
+    
+    // audio sources
+    ofSoundPlayer aviPlayer;
+    ofSoundPlayer sofyPlayer;
+    ofSoundPlayer danPlayer;
+    ofSoundPlayer normPlayer;
 
     void beat();
     void drawCircles();
@@ -28,5 +34,7 @@ class auroraShapes1 : public ofBaseApp{
     void drawRandomCircle(float rx, float ry);
     void drawArc12(int radius, int start, int end);
 
+
     void gotMessage(ofMessage msg);
+    
 };
